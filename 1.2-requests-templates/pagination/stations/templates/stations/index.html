@@ -31,11 +31,11 @@
             </tr>
             </thead>
             <tbody>
-            {% for station in bus_stations %}
+            {% for Name, Street, Distinct in page %}
                 <tr>
-                    <td>{{ station.Name }}</td>
-                    <td>{{ station.Street }}</td>
-                    <td>{{ station.District }}</td>
+                    <td>{{ Name }}</td>
+                    <td>{{ Street }}</td>
+                    <td>{{ Distinct }}</td>
                 </tr>
             {% endfor %}
             </tbody>
