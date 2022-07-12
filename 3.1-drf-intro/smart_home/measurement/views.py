@@ -2,7 +2,7 @@
 # TODO: ListCreateAPIView, RetrieveUpdateAPIView, CreateAPIView
 import datetime
 
-from rest_framework.generics import ListCreateAPIView, CreateAPIView, RetrieveAPIView
+from rest_framework.generics import ListCreateAPIView, CreateAPIView, RetrieveUpdateAPIView
 from rest_framework.response import Response
 
 from measurement.models import Sensor, Measurement
@@ -17,7 +17,7 @@ class SensorListView(ListCreateAPIView):
         return serializer.save()
 
 
-class OneSensorView(RetrieveAPIView):
+class OneSensorView(RetrieveUpdateAPIView):
     queryset = Sensor.objects.all()
     serializer_class = SensorDetailSerializer
 
