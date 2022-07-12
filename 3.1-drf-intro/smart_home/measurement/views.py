@@ -7,14 +7,13 @@ from measurement.models import Sensor
 from measurement.serializers import SensorSerializer, SensorDetailSerializer
 
 
-class SensorListView(ListCreateAPIView, CreateAPIView):
+class SensorListView(ListCreateAPIView):
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
 
-    def post(self, request, *args, **kwargs):
-        new_Sensor = Sensor(title = args["title"], description = args["description"])
-        new_Sensor.save()
-        return Response()
+    def perform_create(self, serializer):
+        return serializer.save()
+
 
 class OneSensorView(RetrieveAPIView):
     queryset = Sensor.objects.all()
