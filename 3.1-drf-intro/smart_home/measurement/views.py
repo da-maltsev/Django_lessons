@@ -1,10 +1,12 @@
 # TODO: опишите необходимые обработчики, рекомендуется использовать generics APIView классы:
 # TODO: ListCreateAPIView, RetrieveUpdateAPIView, CreateAPIView
+import datetime
+
 from rest_framework.generics import ListCreateAPIView, CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 
-from measurement.models import Sensor
-from measurement.serializers import SensorSerializer, SensorDetailSerializer
+from measurement.models import Sensor, Measurement
+from measurement.serializers import SensorSerializer, SensorDetailSerializer, MeasurementSerializer
 
 
 class SensorListView(ListCreateAPIView):
@@ -18,3 +20,11 @@ class SensorListView(ListCreateAPIView):
 class OneSensorView(RetrieveAPIView):
     queryset = Sensor.objects.all()
     serializer_class = SensorDetailSerializer
+
+
+class MeasurementCreateView(CreateAPIView):
+    queryset = Measurement.objects.all()
+    serializer_class = MeasurementSerializer
+
+    def perform_create(self, serializer):
+        return serializer.save(date=datetime.datetime.now())

@@ -9,4 +9,4 @@ class Sensor(models.Model):
 class Measurement(models.Model):
     sensor_id = models.ForeignKey(Sensor, on_delete=models.CASCADE, related_name='measurements' )
     temperature = models.IntegerField()
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now=True)
