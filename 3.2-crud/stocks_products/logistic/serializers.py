@@ -28,7 +28,7 @@ class StockSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Stock
-        fields = ['address', 'products', 'positions']
+        fields = ['address', 'positions']
 
     def create(self, validated_data):
         # достаем связанные данные для других таблиц
