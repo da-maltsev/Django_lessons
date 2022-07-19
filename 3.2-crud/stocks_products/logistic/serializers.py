@@ -28,7 +28,7 @@ class StockSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Stock
-        fields = ['address', 'positions']
+        fields = ['id', 'address', 'positions']
 
     def create(self, validated_data):
         # достаем связанные данные для других таблиц
@@ -57,7 +57,7 @@ class StockSerializer(serializers.ModelSerializer):
         # в нашем случае: таблицу StockProduct
         # с помощью списка positions
         for position in positions:
-            StockProduct.objects.filter(stock=stock, product=position['product']).update(stock=stock, 
-                                       product=position['product'], quantity=position['quantity'], price=position['price'])
+            StockProduct.objects.filter(stock=stock, product_id=position['product'])\
+                .update(stock=stock, product=position['product'], quantity=position['quantity'], price=position['price'])
 
         return stock
